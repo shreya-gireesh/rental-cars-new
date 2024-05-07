@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/blg.css' %}">
+
+    <title>CarWilla</title>
+  </head>
+  <body>
+    <nav class="col  navbar navbar-expand-lg navbar-dark bg-dark home-nav">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="font-weight: 500;">Carwilla</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 2rem;">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#" style="color: white;">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.html" style="color: white;">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blogs' %}" style="color: white;">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html" style="color: white;">Contact</a>
+            </li>
+            </ul>
+        </div>
+            <div class="account">
+                <span class="d-flex">
+                    {% if user %}
+                    <a class="d-flex text-decoration-none">
+                        <box-icon type='solid' color="#ffffff" name='user'></box-icon>
+                        <p>{{name}}</p>
+                    </a>
+                    <span class="ms-2 me-2">|</span>
+                    <a class="d-flex text-decoration-none" href="{% url 'logout' %}">
+                        <p>Logout</p>
+                    </a>
+                    {% else %}
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LoginModal">LOGIN</button>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="traveltip" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url({% static 'img/kochi.jpg' %});"></div>
+    <div class="col travel-header">
+        <h1><strong>One Day Road Trips From Kochi</strong> </h1>
+        
+    </div>
+    <div class="mt-5 mb-5">
+        <div class="container">
+            <div>
+                <h2><strong>One Day Road Trips from Kochi</strong></h2>
+                <p>Kochi, the “Queen of the Arabian Sea,” is the perfect starting point for unforgettable one-day road trips. Embrace 
+                    the spirit of wanderlust as you begin on these scenic journeys that lead to some of the best places to visit near
+                     Kochi. From tranquil backwaters to cascading waterfalls and historical wonders, these day trips promise a 
+                     refreshing experience. Kochi, a city steeped in history and culture, serves as a gateway to a treasure trove of 
+                     nearby destinations waiting to be explored. Experience the thrill of a road adventure as you start on these one-day
+                    road trips from Kochi, each offering a unique and enriching experience. </p>
+            </div>
+            <div class="travel-list mt-5">
+                <h2><strong>Places to explore from Kochi</strong></h2>
+                <div class="mt-4">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Alleppey </strong></h5>
+                                  <p class="card-text">Alleppey, a magnificent hideaway hidden among Kerala’s serene backwaters, 
+                                    draw visitors with its ageless beauty. The “Venice of the East,” this alluring location provides 
+                                    a beguiling network of canals, lagoons, and tranquil lakes that are all encircled by lush vegetation.
+                                    When you travel to Alleppey, you may take on a traditional houseboat cruise and float down the 
+                                    palm-lined rivers while taking in the breathtaking beauty of nature. As you float across the tranquil 
+                                    rivers, enjoy views of village life, spot colourful bird species, and take in the serene atmosphere 
+                                    that characterises Alleppey.</p>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Thattekad Bird Sanctuary and Bhoothathankettu</strong></h5>
+                                  <p class="card-text">Thattekad Bird Sanctuary, called the Salim Ali Bird Sanctuary, is located near 
+                                    Bhoothathankettu dam in Ernakulam district, about 10 kms away from Kothamangalam town and 50 kms 
+                                    away from the main city of Kochi. Covering an area of barely 25 Sq.km, it was the first bird 
+                                    sanctuary in Kerala. The shelter has a rich and varied birdlife, with several forest and water bird 
+                                    species. Some notable species include the Indian pitta, orange-headed thrush, large-billed 
+                                    leaf-warbler, oriental darter, cormorants, Jerdon’s nightjar, Indian cuckoo, whiskered terns, 
+                                    collared scops owl, and Ceylon frogmouth.</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Fort Kochi</strong></h5>
+                                  <p class="card-text">Step back in time as you visit the historic Fort Kochi, an epitome of cultural 
+                                    fusion with Dutch, Portuguese, and British influences. Explore the iconic Chinese Fishing Nets, 
+                                    stroll through charming colonial streets adorned with art galleries and boutique cafes, and witness 
+                                    the timeless allure of the St. Francis Church.</p>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Athirapally</strong></h5>
+                                  <p class="card-text">Embark on a scenic drive to the captivating Athirapally Waterfalls, where nature 
+                                    unveils its grandeur. Feel the mist on your face as the water cascades down the lush green cliffs, 
+                                    creating a breathtaking spectacle. The surrounding forest and wildlife add to the enchanting 
+                                    ambience of this nature’s paradise.</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Kumbalangi</strong></h5>
+                                  <p class="card-text">Discover the rustic charm of Kumbalangi, a quaint fishing village just a short 
+                                    drive from Kochi. Immerse yourself in the unique beauty of Kerala’s backwaters as you cruise along 
+                                    the tranquil canals on traditional country boats. Engage with the warm-hearted locals, experience 
+                                    traditional fishing techniques, and witness the art of coir-making. Kumbalangi is a harmonious 
+                                    blend of cultural heritage and natural splendour, offering a glimpse into traditional life.</p>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Kumarakom</strong></h5>
+                                  <p class="card-text">A charming village settled on the banks of Vembanad Lake. A paradise for nature 
+                                    lovers, Kumarakom boasts lush green landscapes, exotic birdlife, and breathtaking sunsets. Enjoy a 
+                                    relaxed boat ride through the backwaters, relishing the beauty of the famed Kerala houseboats. A 
+                                    visit to Kumarakom promises a day of tranquillity and rejuvenation amidst the lap of nature.</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Vagamon </strong></h5>
+                                  <p class="card-text">Escape to the quaint hill station of Vagamon, surrounded by rolling meadows and misty hills. The journey from Kochi to Vagamon is a scenic delight, offering panoramic views of tea plantations and deep valleys. Once there, indulge in nature walks, paragliding, and exploring the pine forests. Vagamon’s cool climate and natural beauty make it a perfect destination for a refreshing one-day getaway.</p>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Ezhattumugham Nature Village</strong></h5>
+                                  <p class="card-text">Begin a road trip to Ezhattumugham Nature Village, a serene haven for those seeking comfort in nature. The village is adorned with picturesque waterfalls, glistening streams, and verdant forests, offering the perfect setting for a peaceful retreat. Trek through the lush green trails, indulge in birdwatching or unwind by the cascading waterfalls. Ezhattumugham is a hidden gem that unveils the untouched beauty of Kerala’s countryside.</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Wayanad</strong></h5>
+                                  <p class="card-text">Delve into the verdant landscapes of Wayanad, a land of misty mountains and lush green forests. The road to Wayanad is a delightful journey through picturesque hills and spice plantations. Explore the Edakkal Caves, take a serene boat ride on Pookode Lake, and soak in the tranquillity of the Banasura Sagar Dam. Wayanad’s natural beauty and rich biodiversity make it an ideal destination for an immersive one-day escape.</p>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100" >
+                                <div class="card-body">
+                                  <h5 class="card-title"><strong>Munnar</strong></h5>
+                                  <p class="card-text">Embark on a journey to the breathtaking hill station of Munnar, a haven for tea lovers and nature enthusiasts. The road from Kochi to Munnar has lush tea gardens and charming waterfalls, offering captivating views at every turn. Discover the beauty of the Eravikulam National Park, stroll through the tea estates, and witness the enchanting Attukad Waterfalls. Munnar’s scenic splendour and pleasant climate promise a day filled with awe-inspiring sights.</p>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-dark text-white">
+        <div class="container-fluid h-100">
+          <div class="footerContainer text-center">
+            <div class="col pt-3 mb-3 socialicons">
+              <a href=""><i class="bi bi-facebook"></i></a> 
+              <a href=""><i class="bi bi-twitter"></i></a> 
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-google"></i></a>
+              <a href=""><i class="bi bi-youtube"></i></a>
+            </div>
+            <div class="col mb-4 footernav">
+              <ul class="list-unstyled">
+                <li class="me-2"><a href="#">Home</a></li>
+                <li class="me-2"><a href="#">About</a></li>
+                <li class="me-2"><a href="#">Packages</a></li>
+                <li class="me-2"><a href="#">Blogs</a></li>
+                <li class="me-2"><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="pb-3 footerbottom text-center">
+            <p><span class="designer">Carwilla</span> || All rights reserved</p>
+          </div>
+        </div>
+      </footer>
+  </body>
+</html>

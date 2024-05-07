@@ -1,0 +1,68 @@
+
+.navbar-collapse{
+    flex-grow: 0!important;
+}
+.pickup, .dropoff{
+    border: 1px solid #eaeaea;
+    border-radius: 1rem;
+    padding: 10px 30px 10px 30px;
+}
+.pickup-header, .dropoff-header{
+    color: #4d4d4d;
+    position: absolute;
+    margin-top: -25px;
+    margin-left: 10px;
+    background-color: white;
+    padding: 0 5px 0 5px;
+}
+.filter{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+}
+
+.modal-content {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border-radius: 25px;
+    align-items: center;
+    padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+}
+.btn-color-transition {
+    transition: background-color 0.3s ease;
+}
+
+
+  /*Footer*/
+.socialicons a{
+    font-size: 2rem;
+    text-decoration: none;
+    background-color: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 50px;
+}
+.socialicons a i{
+    color: black;
+    opacity: 0.9;
+}
+.socialicons a:hover{
+    background-color: #111;
+    transition: 0.5s;
+}
+.socialicons a:hover i{
+    color: white;
+    transition: 0.5s;
+}
+.footernav ul{
+    display: flex;
+    justify-content: center;
+}
+.footernav ul li a{
+    text-decoration: none;
+    margin: 20px;
+    font-size: 1.3rem;
+}
+footer a{
+    text-decoration: none;
+    color: white;
+}

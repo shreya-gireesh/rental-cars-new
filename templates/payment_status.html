@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      {% load static %}
+       <style>
+          h2{
+            font-size: 3rem;
+          }
+          .account{
+            color: white;
+          }
+          .account a{
+            color: #ffffff;
+          }
+           .details{
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+           }
+      </style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://kit.fontawesome.com/4a30165663.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/rentalcar.css' %}">
+
+    <title>Carwilla</title>
+  </head>
+  <body>
+    <nav class="col  navbar navbar-expand-lg navbar-dark bg-dark home-nav">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="font-weight: 500;">Carwilla</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 2rem;">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'home' %}" style="color: white;">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}" style="color: white;">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blogs' %}" style="color: white;">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact' %}" style="color: white;">Contact</a>
+            </li>
+            </ul>
+        </div>
+            <div class="account">
+                <span class="d-flex">
+                    {% if user %}
+                    <a href="{% url 'account' %}" class="d-flex text-decoration-none">
+                        <box-icon type='solid' color="#ffffff" name='user'></box-icon>
+                        <p>{{name}}</p>
+                    </a>
+                    <span class="ms-2 me-2">|</span>
+                    <a class="d-flex text-decoration-none" href="{% url 'logout' %}">
+                        <p>Logout</p>
+                    </a>
+                    {% else %}
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LoginModal">LOGIN</button>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </nav>
+  <div class="mt-5 container" style="text-align: center;">
+    <i class="fa fa-check-circle" aria-hidden="true" style="font-size: 80px; color: green;"></i>
+        <h4 style="text-align: center;">Thank You! Your payment was successful</h4>
+  <a href="{% url 'home' %}" class="btn btn-primary" >Go Home</a>
+  </div>
+
+  </body>
+</html>
+

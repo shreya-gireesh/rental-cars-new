@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      {% load static %}
+      <style>
+        .account{
+            color: white;
+        }
+        .account a{
+            color: #ffffff;
+        }
+        .title-header{
+            text-transform: uppercase;
+            font-size: 20px;
+            font-weight: 700;
+            color: #5a5959;
+        }
+        .filter{
+            height: fit-content;
+        }
+        .card-deck{
+            box-shadow: 2px 10px 15px 0 rgba(32, 33, 36, 0.2);
+            border-radius: 10px;
+            padding: 1rem 1rem 0 1rem;
+        }
+        .card-title{
+            text-transform: uppercase;
+            font-size: 15px;
+            font-weight: 700;
+            color: #111;
+        }
+        .car-spec{
+            text-transform: uppercase;
+            font-size: 10px;
+            font-weight: 500;
+        }
+        .card-img-top{
+            height: 12rem;
+        }
+        .card-footer{
+            background-color: white!important;
+            align-items: center;
+        }
+        .price{
+            font-size: 18px;
+            font-weight: 500;
+        }
+          .booked{
+            opacity:0.5;
+          }
+      </style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://kit.fontawesome.com/4a30165663.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/carlist.css' %}">
+
+    <title>Carwilla</title>
+</head>
+<body>
+<nav class="col  navbar navbar-expand-lg navbar-dark bg-dark home-nav">
+    <div class="container-fluid">
+    <a class="navbar-brand" href="#" style="font-weight: 500;">Carwilla</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 2rem;">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'home' %}" style="color: white;">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'about' %}" style="color: white;">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'blogs' %}" style="color: white;">Blogs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}" style="color: white;">Contact</a>
+        </li>
+        </ul>
+    </div>
+        <div class="account">
+            <span class="d-flex">
+                {% if user %}
+                <a href="{% url 'account' %}" class="d-flex text-decoration-none">
+                    <box-icon type='solid' color="#ffffff" name='user'></box-icon>
+                    <p>{{name}}</p>
+                </a>
+                <span class="ms-2 me-2">|</span>
+                <a class="d-flex text-decoration-none" href="{% url 'logout' %}">
+                    <p>Logout</p>
+                </a>
+                {% else %}
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LoginModal">LOGIN</button>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</nav>
+
+<div class="mt-5 mb-5 d-flex container-fluid justify-content-center">
+    <div class="me-5 pickup" style="width:400px;">
+        <div class="pickup-header">PickUp</div>
+        <div class="mt-3 d-flex">
+           <box-icon type='solid' name='map'></box-icon>
+          <div>
+              {% for p in pickup %}
+            <h6>{{p.places}}, {{p.location.location}}</h6>
+              {% endfor %}
+            <p>{{pickup_date}}</p>
+          </div>
+        </div>
+    </div>
+
+    <div class="me-5 dropoff" style="width:400px;">
+        <div class="dropoff-header">DropOff</div>
+        <div class="mt-3 d-flex">
+            <box-icon type='solid' name='map'></box-icon>
+              <div>
+                {% for p in dropoff %}
+                <h6>{{p.places}}, {{p.location.location}}</h6>
+                  {% endfor %}
+                <p>{{dropoff_date}}</p>
+              </div>
+        </div>
+    </div>
+</div>
+  <div class="mb-5 d-flex container-fluid justify-content-between">
+    <div class="ms-4 me-5 p-3 container filter" style="width: 450px;">
+      <span class="title-header">Filter</span>
+      <form method="POST">
+          {% csrf_token %}
+        <div class="mt-3">
+          <h6>Transmission</h6>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="manual" value="manual">
+            <label class="form-check-label" >Manual</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="automatic"  value="automatic">
+            <label class="form-check-label" >Automatic</label>
+          </div>
+        </div>
+        <div class="mt-3">
+          <h6>Fuel Type</h6>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="petrol" value="petrol">
+            <label class="form-check-label" >Petrol</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="diesel" value="diesel">
+            <label class="form-check-label" >Diesel</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="electric" value="electric">
+            <label class="form-check-label" >Electric</label>
+          </div>
+        </div>
+        <div class="mt-3">
+            <h6>Brands</h6>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="maruti" value="maruti">
+              <label class="form-check-label" >Maruti</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="toyota" value="toyota" >
+              <label class="form-check-label" >Toyota</label>
+            </div>
+        </div>
+        <div class="mt-3">
+            <h6>Sort By</h6>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="price" value="1">
+              <label class="form-check-label" >Price: Low to High</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="price" value="2" >
+              <label class="form-check-label" >Price: High to Low</label>
+            </div>
+        </div>
+          <div class="d-flex justify-content-center">
+              <input type="submit" class="btn btn-warning" name="filter-btn" value="FILTER">
+          </div>
+      </form>
+    </div>
+    <div class="me-3 container">
+        <div class="d-flex justify-content-between">
+            <span class="title-header">Available Cars</span>
+        </div>
+      <div class="mt-3 row row-cols-1 row-cols-md-3 g-4 ">
+          {% for x in cars %}
+            <div class="col">
+                <div class="card-deck h-100">
+                    <form method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="carid" value="{{x.car.car_id}}">
+                      <div class="d-flex justify-content-center">
+                        <img src="{{x.car_img.url}}" class="card-img-top {% if x.car.car_id in booked_cars %} booked {% endif %}"  alt="...">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title {% if x.car.car_id in booked_cars %} booked {% endif %}">{{x.car.car_name}}</h5>
+                        <div class="card-text d-flex justify-content-between text-muted car-spec {% if x.car.car_id in booked_cars %} booked {% endif %}">
+                            <span>
+                                <img src="{% static 'img/gearbox.png' %}" style="height: 15px; width: 15px;">
+                                {{x.car.car_type}}
+                            </span>
+                            <span>
+                                <img src="{% static 'img/gas-station.png' %}" style="height: 15px; width: 15px;">
+                                {{x.car.car_fuel}}
+                            </span>
+                            <span>
+                                <img src="{% static 'img/car-seat.png' %}" style="height: 15px; width: 15px;">
+                                {{x.car.car_seats}} seats
+                            </span>
+                        </div>
+                      </div>
+                        {% if x.car.car_id in booked_cars %}
+                        <div>
+                            <span></span>
+                        </div>
+                        {% endif %}
+                      <div class="card-footer d-flex justify-content-between {% if x.car.car_id in booked_cars %} booked {% endif %}">
+                        <div class="price">
+                            <span>₹ {{x.car.car_price}}/hr</span>
+                        </div>
+                        <div>
+                            <input type="submit"  class="btn btn-warning selectBtn {% if x.car.car_id in booked_cars %} disabled {% endif %}" name="select-btn" value="SELECT">
+                        </div>
+                      </div>
+                    </form>
+                </div>
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+
+<!--    Modal -->
+  <div class="modal fade" id="LoginModal" aria-hidden="true" aria-labelledby="LoginModalLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="mb-3 btn-group d-flex justify-content-center w-50" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-warning btn-color-transition loginbtn" data-bs-target="#LoginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</button>
+            <button type="button" class="btn btn-warning btn-color-transition regbtn" data-bs-target="#Register" data-bs-toggle="modal" data-bs-dismiss="modal">Register</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: white;"></button>
+        </div>
+        <h3>Welcome Back! </h3>
+        <p>Let's Get You On The Road Again.</p>
+        <form method="POST" class="w-100">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" name="mailid" class="form-control" id="email" >
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password:</label>
+              <input type="password" name="pasw" class="form-control" id="password" >
+            </div>
+            <input type="submit" name="loginbtn" class="btn btn-warning" value="LOGIN">
+        </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="Register" aria-hidden="true" aria-labelledby="RegisterLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="mb-3 btn-group d-flex justify-content-center w-50" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-warning btn-color-transition loginbtn" data-bs-target="#LoginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</button>
+            <button type="button" class="btn btn-warning btn-color-transition regbtn" data-bs-target="#Register" data-bs-toggle="modal" data-bs-dismiss="modal">Register</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: white;"></button>
+        </div>
+        <h3>Join Us and Start Your Journey Today!</h3>
+        <form method="POST" class="w-100">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="username" class="form-label">Username:</label>
+              <input type="text" name="uname" class="form-control" id="username" >
+            </div>
+            <div class="mb-3">
+              <label for="usermail" class="form-label">Email:</label>
+              <input type="email" name="usermail" class="form-control" id="usermail" >
+            </div>
+            <div class="mb-3">
+              <label for="passw" class="form-label">Password:</label>
+              <input type="password" name="upasw" class="form-control" id="passw" >
+            </div>
+            <div class="mb-3">
+              <label for="license" class="form-label">License No:</label>
+              <input type="text" name="licenseno" class="form-control" id="license" >
+            </div>
+            <input type="submit" name="regbtn" class="btn btn-warning" value="REGISTER">
+        </form>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="bg-dark text-white p-3">
+        <div class="container-fluid h-100 p-3">
+          <div class="text-center">
+            <div class="col pt-4 mb-3 socialicons">
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-twitter"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-google"></i></a>
+              <a href=""><i class="bi bi-youtube"></i></a>
+            </div>
+            <div class="col mb-4 footernav">
+              <ul class="list-unstyled">
+                <li class="me-2"><a href="#">Home</a></li>
+                <li class="me-2"><a href="#">About</a></li>
+                <li class="me-2"><a href="#">Blogs</a></li>
+                <li class="me-2"><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="pt-3 footerbottom text-center">
+            <p><span class="designer">Carwilla</span> || All rights reserved</p>
+          </div>
+        </div>
+    </footer>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById("loginbtn").addEventListener("click", function() {
+            document.getElementById("loginbtn").classList.add("btn-warning");
+            document.getElementById("registerbtn").classList.remove("btn-warning");
+        });
+
+        document.getElementById("registerbtn").addEventListener("click", function() {
+            document.getElementById("registerbtn").classList.add("btn-warning");
+            document.getElementById("loginbtn").classList.remove("btn-warning");
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.selectBtn').forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                // Check if the user is logged in
+                {% if user %}
+                    // User is logged in, continue with form submission
+                {% else %}
+                    // User is not logged in, prevent form submission and display alert
+                    event.preventDefault(); // Prevent form submission
+                    alert('Please login to select a car.'); // Display alert message
+                {% endif %}
+            });
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

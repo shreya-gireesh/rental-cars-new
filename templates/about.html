@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/rentalcar.css' %}">
+
+    <title>CarWilla</title>
+  </head>
+  <body>
+    <nav class="col  navbar navbar-expand-lg navbar-dark bg-dark home-nav">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="font-weight: 500;">Carwilla</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 2rem;">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'home' %}" style="color: white;">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}" style="color: white;">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blogs' %}" style="color: white;">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact' %}" style="color: white;">Contact</a>
+            </li>
+            </ul>
+        </div>
+            <div class="account">
+                <span class="d-flex">
+                    {% if user %}
+                    <a class="d-flex text-decoration-none">
+                        <box-icon type='solid' color="#ffffff" name='user'></box-icon>
+                        <p>{{name}}</p>
+                    </a>
+                    <span class="ms-2 me-2">|</span>
+                    <a class="d-flex text-decoration-none" href="{% url 'logout' %}">
+                        <p>Logout</p>
+                    </a>
+                    {% else %}
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LoginModal">LOGIN</button>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="home" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url({% static 'img/about.jpg' %});"></div>
+    <div class="col about-header">
+        <h1>ABOUT</h1>
+    </div>
+    <div class="mt-5">
+      <div class="container">
+        <div>
+          <h4>We take pride in offering the best possible experience to all of our clients. Here are a few reasons why we believe that choosing our car rental service is the right choice for you:</h4>
+        </div>
+        <div class="mt-4">
+          <div class="mb-4 d-flex">
+            <div class="me-4 pt-3 num">
+              <h3>1</h3>
+            </div>
+            <div>
+              <h3>Wide selection of Vehicles:</h3>
+              <p>We have a vast selection of cars that suit the needs of every traveler, whether you are traveling alone, with family or friends, or on a business trip. Our fleet includes compact cars, mid-size sedans, SUVs, luxury cars, and more, all of which are well-maintained and regularly serviced to ensure your safety and comfort.</p>
+            </div>
+          </div>
+          <div class="mb-4 d-flex">
+            <div class="me-4 pt-3 num">
+              <h3>2</h3>
+            </div>
+            <div>
+              <h3>Affordable Rates:</h3>
+              <p>We offer competitive rates for all of our rental vehicles, ensuring that you get the best value for your money. Our rates are transparent and straightforward, with no hidden fees or charges. Plus, we offer discounts and promotions throughout the year to make our services even more affordable.</p>
+            </div>
+          </div>
+          <div class="mb-4 d-flex">
+            <div class="me-4 pt-3 num">
+              <h3>3</h3>
+            </div>
+            <div>
+              <h3>Exceptional Customer Service:</h3>
+              <p>At our car rental company, we are committed to providing you with exceptional customer service from start to finish. Our team of experienced and friendly staff will help you choose the right vehicle for your needs, answer any questions you have, and ensure that your rental experience is smooth and hassle-free.</p>
+            </div>
+          </div>
+          <div class="mb-4 d-flex">
+            <div class="me-4 pt-3 num">
+              <h3>4</h3>
+            </div>
+            <div>
+              <h3>Flexible Rental Option:</h3>
+              <p>We understand that our customers have different needs, which is why we offer flexible rental options to suit your schedule. Whether you need a car for a day, a week, or even longer, we can customize your rental period to fit your specific requirements.</p>
+            </div>
+          </div>
+          <div class="mb-4 d-flex">
+            <div class="me-4 pt-3 num">
+              <h3>5</h3>
+            </div>
+            <div>
+              <h3>Convenient Locations:</h3>
+              <p>We have several convenient rental locations across the city, making it easy for you to pick up and drop off your rental car. Whether you are arriving at the airport, train station, or any other location in the city, we have a rental location nearby.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="bg-dark text-white">
+      <div class="container-fluid h-100">
+        <div class="footerContainer text-center">
+          <div class="col pt-3 mb-3 socialicons">
+            <a href=""><i class="bi bi-facebook"></i></a> 
+            <a href=""><i class="bi bi-twitter"></i></a> 
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-google"></i></a>
+            <a href=""><i class="bi bi-youtube"></i></a>
+          </div>
+          <div class="col mb-4 footernav">
+            <ul class="list-unstyled">
+              <li class="me-2"><a href="#">Home</a></li>
+              <li class="me-2"><a href="#">About</a></li>
+              <li class="me-2"><a href="#">Packages</a></li>
+              <li class="me-2"><a href="#">Blogs</a></li>
+              <li class="me-2"><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="pb-3 footerbottom text-center">
+          <p>Created by <span class="designer">Name</span> || All rights reserved</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

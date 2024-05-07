@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      {% load static %}
+       <style>
+          h2{
+            font-size: 3rem;
+          }
+          .account{
+            color: white;
+          }
+          .account a{
+            color: #ffffff;
+          }
+      </style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://kit.fontawesome.com/4a30165663.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/rentalcar.css' %}">
+
+    <title>Carwilla</title>
+  </head>
+  <body>
+    <nav class="col  navbar navbar-expand-lg navbar-dark bg-dark home-nav">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="font-weight: 500;">Carwilla</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 2rem;">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'home' %}" style="color: white;">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}" style="color: white;">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blogs' %}" style="color: white;">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact' %}" style="color: white;">Contact</a>
+            </li>
+            </ul>
+        </div>
+            <div class="account">
+                <span class="d-flex">
+                    {% if user %}
+                    <a href="{% url 'account' %}" class="d-flex text-decoration-none">
+                        <box-icon type='solid' color="#ffffff" name='user'></box-icon>
+                        <p>{{name}}</p>
+                    </a>
+                    <span class="ms-2 me-2">|</span>
+                    <a class="d-flex text-decoration-none" href="{% url 'logout' %}">
+                        <p>Logout</p>
+                    </a>
+                    {% else %}
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LoginModal">LOGIN</button>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="home" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url({% static 'img/car.jpg' %});">
+        <div class="container info">
+            <h2>Renting a Car is now at your fingertips!</h2>
+            <p>Rev up your plans with our speedy online car rentals.<br> Book in a flash, hit the road in a dash!</p>
+        </div>
+    </div>
+    <div class="container d-flex car-booking">
+        <form method="POST" class="d-flex" id="carbookingform">
+            {% csrf_token %}
+            <div class="col me-3">
+                <select class="form-select" name="pickup_location" aria-label="Default select example">
+                    <option selected disabled>Pickup Location</option>
+                    {% for p in places%}
+                    <option class="m-3" value="{{p.places_id}}">{{p.places}}</option>
+                    {% endfor %}
+                </select>
+                <div class="error-msg" id="pickupLocationError"></div>
+            </div>
+            <div class="col me-3">
+                <input type="date" class="form-control" name="pickup_date" placeholder="Pickup Date">
+                <div class="error-msg" id="pickupDateError"></div>
+            </div>
+            <div class="col me-3">
+                <select class="form-select" name="dropoff_location" aria-label="Default select example">
+                    <option selected disabled>Dropoff Location</option>
+                    {% for p in places %}
+                    <option value="{{p.places_id}}">{{p.places}}</option>
+                    {% endfor %}
+                </select>
+                <div class="error-msg" id="dropoffLocationError"></div>
+            </div>
+            <div class="col me-3">
+                <input type="date" class="form-control" name="dropoff_date" placeholder="Dropoff Date">
+                <div class="error-msg" id="dropoffDateError"></div>
+            </div>
+            <div class="col">
+                <input type="submit" name="book-now" class="btn btn-warning" value="BOOK NOW" onclick="validateForm()">
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+    <div class="mt-5 works">
+        <div class="title">
+            <h3 class="title-header">How it works?</h3>
+            <p> Discover your perfect car, customize your rental dates, and finalize your reservation effortlessly.
+                It's the hassle-free way to get behind the wheel and embark on your adventure.<br> Ready to roll? Let's get started!
+            </p>
+        </div>
+        <div class="container works-container">
+            <div class="step">
+                <span class="number"><span><i class="fa-solid fa-car"></i></span> </span>
+                <span class="caption">Select Vehicle</span>
+            </div>
+            <div class="step">
+                <span class="number"><span><i class="fa-regular fa-calendar-days"></i></span> </span>
+                <span class="caption">Date & Time</span>
+            </div>
+            <div class="step">
+                <span class="number"><span><i class="fa-solid fa-car-on"></i></span> </span>
+                <span class="caption">Pick n Drop</span>
+            </div>
+            <div class="step">
+                <span class="number"><span><i class="fa-solid fa-address-card"></i></span> </span>
+                <span class="caption">Check Out</span>
+            </div>
+            <div class="step">
+                <span class="number"><span><i class="fa-solid fa-circle-check"></i></span> </span>
+                <span class="caption">Done</span>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 container about" id="about">
+        <div class="card-deck mb-3 about-container ">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="{% static 'img/cars.jpg' %}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h3 class="card-title d-flex title-header">About Us</h3>
+                  <p class="card-text">Welcome to CarWilla, where we merge a love for travel with unparalleled service. Founded
+                    on a mission to redefine convenience and reliability in car rentals, we go above and beyond to surpass your
+                    expectations. Our dedication to providing top-quality vehicles, seamless booking experiences, and personalized
+                    customer support ensures that your journey with us is nothing short of exceptional.<br><br>
+                    At CarWilla, we're more than just a rental service – we're your trusted travel companion. Whether you're
+                    exploring new destinations or simply need a reliable ride for your daily commute, count on us to be there every
+                    step of the way. Join us and discover a new standard of excellence in car rentals.
+                  </p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 mb-5 services" id="services">
+        <div class="title">
+            <h3 class="title-header">Services we offer</h3>
+        </div>
+        <div class="mb-3 container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">Car Accessories</h5>
+                      <p class="card-text">Upgrade your ride with our selection of premium car accessories for added comfort and convenience on the road.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">Technical Repair</h5>
+                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">Vast Reservation</h5>
+                      <p class="card-text">Secure your journey hassle-free with our extensive reservation service, offering a wide range of vehicles tailored to your needs.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h5 class="card-title">24/7 Support</h5>
+                      <p class="card-text">Drive with peace of mind knowing our 24/7 support team is here to assist you every step of the way.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <h5 class="card-title">Affordable Rates</h5>
+                        <p class="card-text">Drive with peace of mind knowing our 24/7 support team is here to assist you every step of the way.</p>
+                      </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100">
+                      <div class="card-body">
+                        <h5 class="card-title">Rental Cars</h5>
+                        <p class="card-text">Drive with peace of mind knowing our 24/7 support team is here to assist you every step of the way.</p>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div class="mt-5 cars" id="cars">-->
+<!--        <div class="title">-->
+<!--            <h2>Choose your Car</h2>-->
+<!--        </div>-->
+<!--        <div class="container cars-container">-->
+<!--            {% for x in cars %}-->
+<!--            <div class="card" style="width: 25rem;">-->
+<!--                <img src="{{x.car_img.url}}" class="w-100 h-100 card-img-top" alt="...">-->
+<!--                <div class="card-body">-->
+<!--                    <div class="d-flex justify-content-between card-title">-->
+<!--                        <h4>{{x.car.car_name}} {{x.car.car_model}}</h4>-->
+<!--                        <span>Rs{{x.car.car_price}}/hr</span>-->
+<!--                    </div>-->
+<!--                  <p class="card-text text-muted">5 Seater, Manual, Petrol</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            {% endfor %}-->
+
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+<!--    Modal -->
+  <div class="modal fade" id="LoginModal" aria-hidden="true" aria-labelledby="LoginModalLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="mb-3 btn-group d-flex justify-content-center w-50" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-warning btn-color-transition loginbtn" data-bs-target="#LoginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</button>
+            <button type="button" class="btn btn-warning btn-color-transition regbtn" data-bs-target="#Register" data-bs-toggle="modal" data-bs-dismiss="modal">Register</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: white;"></button>
+        </div>
+        <h3>Welcome Back! </h3>
+        <p>Let's Get You On The Road Again.</p>
+        <form method="POST" class="w-100">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" name="mailid" class="form-control" id="email" >
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password:</label>
+              <input type="password" name="pasw" class="form-control" id="password" >
+            </div>
+            <div>
+               <a href="#"> Forgot Password? </a>
+            </div>
+
+            <input type="submit" name="loginbtn" class="mt-3 btn btn-warning" value="LOGIN">
+        </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="Register" aria-hidden="true" aria-labelledby="RegisterLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="mb-3 btn-group d-flex justify-content-center w-50" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-warning btn-color-transition loginbtn" data-bs-target="#LoginModal" data-bs-toggle="modal" data-bs-dismiss="modal">Login</button>
+            <button type="button" class="btn btn-warning btn-color-transition regbtn" data-bs-target="#Register" data-bs-toggle="modal" data-bs-dismiss="modal">Register</button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color: white;"></button>
+        </div>
+        <h3>Join Us and Start Your Journey Today!</h3>
+        <form method="POST" class="w-100">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="username" class="form-label">Username:</label>
+              <input type="text" name="uname" class="form-control" id="username" >
+            </div>
+            <div class="mb-3">
+              <label for="usermail" class="form-label">Email:</label>
+              <input type="email" name="usermail" class="form-control" id="usermail" >
+            </div>
+            <div class="mb-3">
+              <label for="passw" class="form-label">Password:</label>
+              <input type="password" name="upasw" class="form-control" id="passw" >
+                {% if error_message %}
+                    <small style="color:red;">{{error_message}}</small>
+                {% endif %}
+            </div>
+            <div class="mb-3">
+              <label for="pno" class="form-label">Phone No:</label>
+              <input type="text" name="pno" class="form-control" id="pno" >
+            </div>
+            <div class="mb-3">
+              <label for="license" class="form-label">License No:</label>
+              <input type="text" name="licenseno" class="form-control" id="license" >
+            </div>
+            <input type="submit" name="regbtn" class="btn btn-warning" value="REGISTER">
+        </form>
+    </div>
+  </div>
+</div>
+
+
+<footer class="bg-dark text-white p-3" >
+      <div class="container-fluid h-100  p-3 ">
+        <div class=" text-center">
+          <div class="col pt-4 mb-3  socialicons ">
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-twitter"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-google"></i></a>
+            <a href=""><i class="bi bi-youtube"></i></a>
+          </div>
+          <div class="col mb-4 footernav">
+            <ul class="list-unstyled">
+              <li class="me-2"><a href="#">Home</a></li>
+              <li class="me-2"><a href="#">About</a></li>
+              <li class="me-2"><a href="#">Blogs</a></li>
+              <li class="me-2"><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="pt-3 footerbottom text-center">
+          <p><span class="designer">Carwilla</span> || All rights reserved</p>
+        </div>
+      </div>
+</footer>
+
+  </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        document.getElementById("loginbtn").addEventListener("click", function() {
+            document.getElementById("loginbtn").classList.add("btn-warning");
+            document.getElementById("registerbtn").classList.remove("btn-warning");
+        });
+
+        document.getElementById("registerbtn").addEventListener("click", function() {
+            document.getElementById("registerbtn").classList.add("btn-warning");
+            document.getElementById("loginbtn").classList.remove("btn-warning");
+        });
+    });
+    function validateForm(event) {
+        event.preventDefault(); // Prevent form submission by default
+
+        var pickupLocation = document.getElementById('pickupLocation').value;
+        var pickupDate = document.getElementById('pickupDate').value;
+        var dropoffLocation = document.getElementById('dropoffLocation').value;
+        var dropoffDate = document.getElementById('dropoffDate').value;
+
+        var isValid = true;
+
+        if (pickupLocation === null || pickupLocation === "") {
+            document.getElementById('pickupLocationError').innerText = "Please select a pickup location.";
+            isValid = false;
+        } else {
+            document.getElementById('pickupLocationError').innerText = "";
+        }
+
+        if (pickupDate === null || pickupDate === "") {
+            document.getElementById('pickupDateError').innerText = "Please enter a pickup date.";
+            isValid = false;
+        } else {
+            document.getElementById('pickupDateError').innerText = "";
+        }
+
+        if (dropoffLocation === null || dropoffLocation === "") {
+            document.getElementById('dropoffLocationError').innerText = "Please select a dropoff location.";
+            isValid = false;
+        } else {
+            document.getElementById('dropoffLocationError').innerText = "";
+        }
+
+        if (dropoffDate === null || dropoffDate === "") {
+            document.getElementById('dropoffDateError').innerText = "Please enter a dropoff date.";
+            isValid = false;
+        } else {
+            document.getElementById('dropoffDateError').innerText = "";
+        }
+
+        if (isValid) {
+            // If all inputs are valid, submit the form
+            document.getElementById('carbookingform').submit();
+        }
+    }
+</script>
+</html>

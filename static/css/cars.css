@@ -1,0 +1,22 @@
+h2{
+    font-size: 3rem;
+}
+.account{
+    color: white;
+}
+.account a{
+    color: #ffffff;
+}
+.navbar-collapse{
+    flex-grow: 0!important;
+}
+.nav-link{
+    color: white;
+}
+.car-container{
+    border: 1px solid #eaeaea;
+}
+.car-specific img{
+    height: 15px;
+    width: 15px;
+}

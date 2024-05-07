@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/blg.css' %}">
+
+    <title>CarWilla</title>
+  </head>
+  <body>
+    <nav class="col  navbar navbar-expand-lg navbar-dark bg-dark home-nav">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="font-weight: 500;">Carwilla</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 2rem;">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#" style="color: white;">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.html" style="color: white;">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blogs' %}" style="color: white;">Blogs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html" style="color: white;">Contact</a>
+            </li>
+            </ul>
+        </div>
+            <div class="account">
+                <span class="d-flex">
+                    {% if user %}
+                    <a class="d-flex text-decoration-none">
+                        <box-icon type='solid' color="#ffffff" name='user'></box-icon>
+                        <p>{{name}}</p>
+                    </a>
+                    <span class="ms-2 me-2">|</span>
+                    <a class="d-flex text-decoration-none" href="{% url 'logout' %}">
+                        <p>Logout</p>
+                    </a>
+                    {% else %}
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#LoginModal">LOGIN</button>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </nav>
+    <div class="traveltip" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url({% static 'img/city.jpg' %});"></div>
+    <div class="col container travel-header">
+        <h1><strong>Best Places To Visit Near Trivandrum- Weekend Getaways</strong> </h1>
+        <h5 class="col mt-4">Are you Looking for Weekend getaways around Trivandrum? Read this article to know the best places to 
+            visit within 100Kms & attraction near Trivandrum and plan your trip.</h5> 
+    </div>
+    <div class="mt-5 mb-5">
+        <div class="container">
+            <div>
+                <h2><strong>How to plan a weekend drive from Trivandrum? </strong></h2>
+                <p>The best way to plan a weekend drive from Trivandrum is to hire a self-driven car. Most travelers opt for a 
+                    self-driven car on rent as it is a cost-effective option where you can hire the car of your choice and enjoy a 
+                    smooth drive to your destination. You must study the entire route carefully and plan your pit stops to save time and have a hassle-free journey. 
+                    Refrain from traveling on rainy days; however, if you're expecting a sunny day or pleasant weather, you can plan for your weekend trip. </p>
+            </div>
+            <div class="travel-list">
+                <h2><strong>Top places and weekend getaways from Trivandrum </strong></h2>
+                <div class="d-flex card mb-4 " >
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{% static 'img/neyyar-dam.jpg' %}" class="w-100">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Neyyar Dam</strong> </h5>
+                                <p>This place contains both a dam and a sanctuary and is one of the unique places to visit around Trivandrum.. 
+                                If you are travelling with children, you should start your weekend trip with this Neyyar Dam. The Neyyar 
+                                Sanctuary consists of a crocodile park, a lion safari, and a deer park. This place is so beautiful, that you 
+                                will need 1-1.5 hours in this place to look around completely. The tranquility of nature will amaze you.
+                                <br>
+                                You must start your drive at around 7 AM to get a soothing driveway. If you choose to come to Trivandrum 
+                                between November to February, then you will get a soothing climate to drive. The time to reach this place is a
+                                round 1hour and may vary according to the distance from the place you get to stay in Trivandrum<br>
+                                There are small foothills where you can trek. Therefore, you can keep some trekking equipment with you that 
+                                you can use either here or in the next weekend location. After you completely enjoy your visit to the Neyyar 
+                                Dam and Sanctuary, you can start for the next location, which is around another 1.5 hours of drive from this 
+                                place. One suggestion would be to have an early lunch on the way to driving.
+                            </p> 
+                            </div>
+                        </div> 
+                    </div>     
+                </div>
+                <div class="d-flex card mb-4" >
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{% static 'img/ponmudi.jpg' %}" class="w-100">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Ponmudi</strong> </h5>
+                                <p>One of the best weekend getaways from Trivandrum is Ponmudi.This location is filled with tea and 
+                                    coconut plantations. The locales are breathtakingly beautiful. You will enjoy the scenic beauty 
+                                    from the car drive and after you reach there. Once you reach there, you will take another hour to 
+                                    see the location. 
+                                <br>
+                                Since you will not get good restaurants near this place to have your lunch, you should take your lunch 
+                                before reaching this place. There are many hairpin curves while driving towards Ponmudi which is why 
+                                you must be very careful while driving through those turns. You can walk through the plantations or 
+                                drive through the way, whichever you like. However, walking will allow you to behold the scenic beauty 
+                                in a better way.
+                            </p> 
+                            </div>
+                        </div> 
+                    </div>     
+                </div>
+                <div class="d-flex card mb-4" >
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{% static 'img/manakayam.jpg' %}" class="w-100">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Mankayam Waterfalls</strong> </h5>
+                                <p>This is one of the best places to visit near Trivandrum, within 100 kms. You can start your journey 
+                                    by travelling for 1.5 hours to Mankayam waterfalls.  Tourists can visit the waterfalls and the 
+                                    forest around . Those starting their weekend trip early in the morning from the Mankayam waterfalls 
+                                    can take a bath at the Kurissadi ghats. This place opens as early as 8 AM, so you can start at 6:30 
+                                    in the morning, to take a bath before it starts crowding near the waterfalls. 
+                                
+                            </p> 
+                            </div>
+                        </div> 
+                    </div>     
+                </div>
+                <div class="d-flex card mb-4" >
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{% static 'img/thenmala.jpg' %}" class="w-100">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Thenmala Sanctuary </strong> </h5>
+                                <p>This sanctuary is built across the Kallar river and is best for a one-day trip from Trivandrum.. 
+                                    This location is only 15 kilometers away from Ponmudi tea plantations. Therefore, before crashing 
+                                    back to your hotel, you can  look in at the sanctuary and enjoy some sports and adventures. The
+                                     most famous activities of Thenmala sanctuary is tree climbing and trekking. 
+                                
+                            </p> 
+                            </div>
+                        </div> 
+                    </div>     
+                </div>
+                <div class="d-flex card mb-4" >
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{% static 'img/poovar.jpg' %}" class="w-100">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><strong>Poovar Coastal Regions </strong> </h5>
+                                <p>On this weekend trip, you  can keep the last place to visit as Poovar coastal regions. This contains 
+                                    a very beautiful beach which is around 2-hour drive from the Mankayam waterfalls. If you are 
+                                    starting your trip with Mankayam waterfalls, you can stay in a resort in Poovar and visit the 
+                                    sanctuaries the next day from Poovar. This areas' mangroves and backwaters are breathtaking, 
+                                    and you need at least 3-4 hours to  look around completely and enjoy the beauty. This is one of 
+                                    the best attractions near Trivandrum. 
+                            </p> 
+                            </div>
+                        </div> 
+                    </div>     
+                </div>
+            </div>
+            <hr>
+            <div>
+                With our thoughtful list of top places to visit near Trivandrum, we are sure you are flooded with ideas for a 
+                thrilling weekend getaway. The only word of caution we would like to give is that you must study the road map before 
+                heading out. It will help you understand the roads better and take an alternative route if you're stuck in a traffic 
+                jam or due to bad weather. 
+            </div>
+        </div>
+    </div>
+    <footer class="bg-dark text-white">
+        <div class="container-fluid h-100">
+          <div class="footerContainer text-center">
+            <div class="col pt-3 mb-3 socialicons">
+              <a href=""><i class="bi bi-facebook"></i></a> 
+              <a href=""><i class="bi bi-twitter"></i></a> 
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-google"></i></a>
+              <a href=""><i class="bi bi-youtube"></i></a>
+            </div>
+            <div class="col mb-4 footernav">
+              <ul class="list-unstyled">
+                <li class="me-2"><a href="#">Home</a></li>
+                <li class="me-2"><a href="#">About</a></li>
+                <li class="me-2"><a href="#">Packages</a></li>
+                <li class="me-2"><a href="#">Blogs</a></li>
+                <li class="me-2"><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="pb-3 footerbottom text-center">
+            <p>Created by <span class="designer">Name</span> || All rights reserved</p>
+          </div>
+        </div>
+      </footer>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+*{
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.navbar-collapse{
+    flex-grow: 0!important;
+ }
+.blog{
+    height: 85vh;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+.blog-header{
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    text-align: center;
+    width: fit-content;
+    color: #fff;
+    opacity: 0.8;
+}
+.blog-header h1{
+    font-size: 100px;
+    font-weight: bold;
+}
+.card{
+    border-radius: 1rem;
+}
+.card img{
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+}
+.card-footer{
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    background-color: #fff;
+    border: 0;
+}
+.card-footer:last-child {
+    border-radius: 0 0 calc(1rem - 1px) calc(1rem - 1px);
+}
+.card-footer a{
+    text-decoration: none;
+}
+.text-left{
+    text-align: left;
+    border-radius: 1rem;
+}
+.text-center{
+    text-align: center;
+    border-radius: 1rem;
+}
+.text-right{
+    text-align: right;
+    border-radius: 1rem;
+}
+.traveltip{
+    height: 75vh;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.travel-header{
+    position: absolute;
+    top: 40%;
+    left: 5%;
+    text-align: left;
+    width: 50%;
+    color: #fff;
+    opacity: 0.9;
+}
+.travel-list .card img{
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    border-top-right-radius: 0;
+}
+/* footer */
+.socialicons a{
+    font-size: 2rem;
+    text-decoration: none;
+    background-color: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 50px;
+}
+.socialicons a i{
+    color: black;
+    opacity: 0.9;
+}
+.socialicons a:hover{
+    background-color: #111;
+    transition: 0.5s;
+}
+.socialicons a:hover i{
+    color: white;
+    transition: 0.5s;
+}
+.footernav ul{
+    display: flex;
+    justify-content: center;
+}
+.footernav ul li a{
+    text-decoration: none;
+    margin: 20px;
+    font-size: 1.3rem;
+}
+footer a{
+    text-decoration: none;
+    color: white;
+}

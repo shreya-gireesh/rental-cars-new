@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+      {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://kit.fontawesome.com/4a30165663.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/rentalcar.css' %}">
+
+    <title>Carwilla</title>
+  </head>
+<body>
+<div class="container">
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3 row">
+      <label for="car_name" class="col-sm-2 col-form-label">Car Name:</label>
+      <div class="col-sm-6">
+        {{form.car_name}}
+        {% if form.car_name.errors %}
+        <small class="text-danger">{{ form.car_name.errors }}</small>
+        {% endif %}
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="car_company" class="col-sm-2 col-form-label">Car Company:</label>
+      <div class="col-sm-6">
+        {{form.car_company}}
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="car_type" class="col-sm-2 col-form-label">Car Type:</label>
+      <div class="col-sm-6">
+        {{form.car_type}}
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="car_fuel" class="col-sm-2 col-form-label">Car Fuel:</label>
+      <div class="col-sm-6">
+        {{form.car_fuel}}
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="car_fuel" class="col-sm-2 col-form-label">Seats:</label>
+      <div class="col-sm-6">
+        {{form.persons}}
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="car_price" class="col-sm-2 col-form-label">Price per hour:</label>
+      <div class="col-sm-6">
+        {{form.car_price}}
+      </div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </form>
+</div>
+</body>
+</html>
