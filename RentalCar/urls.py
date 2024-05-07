@@ -51,6 +51,8 @@ urlpatterns = [
 
     #customadmin
     path('admin_home', view_admin.admin_home, name='admin_home'),
+    path('admin_login', view_admin.admin_login, name='admin_login'),
+    path('admin_logout', view_admin.admin_logout, name='admin_logout'),
     path('admin_car', view_admin.admin_car, name='admin_car'),
     path('admin_car_reg', view_admin.admin_car_reg, name='admin_car_reg'),
     path('admin_car_images', view_admin.admin_car_images, name='admin_car_images'),
