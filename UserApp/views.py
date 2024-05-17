@@ -204,7 +204,7 @@ def car(request):
     carid = request.session.get('carid')
     cars = CarImgModel.objects.filter(car_id=carid)
     car_interiors = CarInteriorsModel.objects.filter(car__car_id=carid)
-    review = CommentModel.objects.filter(car__car_id=carid)
+    reviews = CommentModel.objects.filter(car__car_id=carid)
     user_authenticated = 'user' in request.session
     username = request.session.get('user', None)
 
@@ -236,7 +236,7 @@ def car(request):
     return render(request, 'car.html',
                   {'car_interiors': car_interiors, 'cars': cars, 'user': user_authenticated, 'name': username,
                    'pickup': pickup, 'pickup_date': pdate.date(), 'dropoff': dropoff,
-                   'dropoff_date': ddate.date(), 'hours': hours, 'reviews': review})
+                   'dropoff_date': ddate.date(), 'hours': hours, 'reviews': reviews})
 
 
 def account(request):
