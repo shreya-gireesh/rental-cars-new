@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
+from django.contrib import messages
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from AdminApp.models import *
@@ -24,9 +25,13 @@ def home(request):
         if request.POST.get('loginbtn'):
             mailid = request.POST.get('mailid')
             pasw = request.POST.get('pasw')
-            user = UserRegModel.objects.get(user_mail=mailid, user_pasw=pasw)
-            request.session['user'] = user.user_name
-            return redirect('/')
+            try:
+                user = UserRegModel.objects.get(user_mail=mailid, user_pasw=pasw)
+                request.session['user'] = user.user_name
+                return redirect('/')
+            except:
+                messages.error(request, 'Invalid email or password. Please try again.')
+                return redirect('/')
         if request.POST.get('regbtn'):
             uname = request.POST.get('uname')
             usermail = request.POST.get('usermail')
@@ -81,6 +86,47 @@ def booking(request):
     time_difference = ddate - pdate
     total_hours = time_difference.total_seconds() / 3600
     request.session['hour'] = total_hours
+
+    if request.POST.get('loginbtn'):
+        mailid = request.POST.get('mailid')
+        pasw = request.POST.get('pasw')
+        try:
+            user = UserRegModel.objects.get(user_mail=mailid, user_pasw=pasw)
+            request.session['user'] = user.user_name
+            return render(request, 'booking.html',
+                          {'booked_cars': car_id, 'cars': cars, 'user': user_authenticated, 'name': username,
+                           'pickup': pickup, 'pickup_date': pdate.date(), 'dropoff': dropoff,
+                           'dropoff_date': ddate.date()})
+        except:
+            messages.error(request, 'Invalid email or password. Please try again.')
+            return render(request, 'booking.html',
+                          {'booked_cars': car_id, 'cars': cars, 'user': user_authenticated, 'name': username,
+                           'pickup': pickup, 'pickup_date': pdate.date(), 'dropoff': dropoff,
+                           'dropoff_date': ddate.date()})
+
+    if request.POST.get('regbtn'):
+        uname = request.POST.get('uname')
+        usermail = request.POST.get('usermail')
+        upasw = request.POST.get('upasw')
+        pno = request.POST.get('pno')
+        licenseno = request.POST.get('licenseno')
+        try:
+            validate_password(upasw)
+        except ValidationError as e:
+            # Handle the validation error (e.g., display error message)
+            error_message = str(e)
+            return render(request, 'home.html',
+                          {'error_message': error_message})
+        newuser = UserRegModel()
+        newuser.user_name = uname
+        newuser.user_mail = usermail
+        newuser.user_pasw = upasw
+        newuser.user_pno = pno
+        newuser.license_no = licenseno
+        newuser.save()
+        return render(request, 'booking.html',
+                      {'booked_cars': car_id, 'cars': cars, 'user': user_authenticated, 'name': username,
+                       'pickup': pickup, 'pickup_date': pdate.date(), 'dropoff': dropoff, 'dropoff_date': ddate.date()})
 
     if request.method == 'POST':
         # Filters

@@ -12,6 +12,18 @@
           .account a{
             color: #ffffff;
           }
+           .error-box {
+            background-color: transparent;
+
+            width: fit-content;
+        }
+
+        .error-message {
+            background-color: red;
+            padding: 10px; /* Add padding for better visibility */
+            margin-bottom: 10px; /* Optional: Add margin for spacing */
+            color: white; /* Red text color */
+        }
       </style>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -70,7 +82,15 @@
             </div>
         </div>
     </nav>
+
     <div class="home" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url({% static 'img/car.jpg' %});">
+        {% if messages %}
+            <div class="container d-flex justify-content-center error-box" role="alert">
+                {% for message in messages %}
+                    <div class="error-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <div class="container info">
             <h2>Renting a Car is now at your fingertips!</h2>
             <p>Rev up your plans with our speedy online car rentals.<br> Book in a flash, hit the road in a dash!</p>
