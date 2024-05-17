@@ -129,6 +129,8 @@ def booking(request):
                        'pickup': pickup, 'pickup_date': pdate.date(), 'dropoff': dropoff, 'dropoff_date': ddate.date()})
 
     if request.method == 'POST':
+        if request.POST.get('reset-btn'):
+            cars = CarImgModel.objects.all()
         # Filters
         if request.POST.get('filter-btn'):
             if request.POST.get('manual'):
@@ -249,6 +251,7 @@ def account(request):
     if request.POST.get('postbtn'):
         comments = request.POST.get('comments')
         ratings = request.POST.get('ratings')
+        carid = request.POST.get('car_id')
         review = CommentModel()
         review.user = UserRegModel.objects.get(user_name = username)
         review.car = CarModel.objects.get(car_id = carid)
