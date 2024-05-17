@@ -172,7 +172,7 @@
                                     <td>{{booking.pickup_date}}</td>
                                     <td>{{booking.dropof}}</td>
                                     <td>{{booking.dropof_date}}</td>
-                                    <td> <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ReviewModal">Add Review</button> </td>
+                                    <td> <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ReviewModal" onclick="openReviewModal('{{ bookings.car }}')">Add Review</button> </td>
 
                                   </tr>
                                 {% endfor %}
@@ -257,6 +257,8 @@
       <div class="modal-body">
         <form method="POST" class="w-100">
           {% csrf_token %}
+            <input type="hidden" name="car_id" id="car_id" value=""> <!-- This hidden input will store the car ID -->
+
           <div class="mb-3">
             <label for="comments" class="form-label">Write your Review:</label>
             <input type="text" name="comments" class="form-control" id="comments" required>
@@ -294,6 +296,10 @@
     } else {
         bookingTabs.show('completed-tab')
     }
+      function openReviewModal(carId) {
+    // Set the car ID in the hidden input field of the review modal
+    document.getElementById('car_id').value = carId;
+}
 </script>
   </body>
 </html>
