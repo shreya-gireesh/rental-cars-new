@@ -208,9 +208,20 @@ def car(request):
     user_authenticated = 'user' in request.session
     username = request.session.get('user', None)
 
+    # Review
+    if request.POST.get('postbtn'):
+        comments = request.POST.get('comments')
+        ratings = request.POST.get('ratings')
+        review = CommentModel()
+        review.user = UserRegModel.objects.get(user_name = username)
+        review.car = CarModel.objects.get(car_id = carid)
+        review.comment = comments
+        review.rating = ratings
+        review.save()
+
+    # Booking
     if request.POST.get('confirm-btn'):
         car_id = request.session.get('carid')
-        print(car_id)
         new_booking = BookingModel()
         new_booking.car = CarModel.objects.get(car_id = car_id)
         new_booking.user = UserRegModel.objects.get(user_name = username)
@@ -221,7 +232,6 @@ def car(request):
         new_booking.save()
         booking_id = new_booking.booking_id
         request.session['booking_id'] = booking_id
-        print(booking_id)
         return redirect('/payment')
     return render(request, 'car.html',
                   {'car_interiors': car_interiors, 'cars': cars, 'user': user_authenticated, 'name': username,
@@ -235,6 +245,17 @@ def account(request):
     current_date = datetime.now().date()
     completed_bookings = BookingModel.objects.filter(user__user_name=username, dropof_date__lt=current_date)
     upcoming_bookings = BookingModel.objects.filter(user__user_name=username, pickup_date__gte=current_date)
+
+    if request.POST.get('postbtn'):
+        comments = request.POST.get('comments')
+        ratings = request.POST.get('ratings')
+        review = CommentModel()
+        review.user = UserRegModel.objects.get(user_name = username)
+        review.car = CarModel.objects.get(car_id = carid)
+        review.comment = comments
+        review.rating = ratings
+        review.save()
+
     if request.POST.get('save-btn'):
         user = UserRegModel.objects.get(user_name=username)
         user.user_name = request.POST.get('username')
@@ -250,7 +271,9 @@ def account(request):
 
 
 def faq_section(request):
-    return render(request, 'faq.html')
+    username = request.session.get('user')
+    users = UserRegModel.objects.filter(user_name=username)
+    return render(request, 'faq.html', {'name': username, 'user': users})
 
 
 def payment(request):
@@ -271,7 +294,7 @@ def payment(request):
 
     user_authenticated = 'user' in request.session
     username = request.session.get('user', None)
-    print(request.POST.get('amount'))
+
     if request.method == 'POST':
         amount = int(request.POST.get('amount')) * 100
 
@@ -285,7 +308,7 @@ def payment(request):
             'payment_capture': 1
         }
         response_payment = client.order.create(data = payment_data)
-        print(response_payment)
+
         order_id = response_payment['id']
         order_status = response_payment['status']
 
