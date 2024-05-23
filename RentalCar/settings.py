@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'django-insecure-xdcmbys=mxpdzg)24%jm^88uvinyg$z+)fx$%o+d83obz%=^e_
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -39,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'UserApp',
     'AdminApp',
-
+    'corsheaders',
     'storages'
 ]
 
@@ -51,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'RentalCar.urls'
@@ -73,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'RentalCar.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -83,10 +82,10 @@ DATABASES = {
         'NAME': 'rentalcar',
         'USER': 'root',
         'PASSWORD': 'shrgs2811',
-        'HOST':'database-1.c320agwsq1kw.eu-north-1.rds.amazonaws.com',
-        'PORT':'3306',
-        }
+        'HOST': 'database-1.c320agwsq1kw.eu-north-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
+}
 
 # DATABASES = {
 #     'default': {
@@ -98,7 +97,6 @@ DATABASES = {
 #         'PORT':'3306',
 #         }
 #     }
-
 
 
 # Password validation
@@ -119,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -130,7 +127,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -148,3 +144,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CORS_ALLOW_ALL_ORIGINS = True
