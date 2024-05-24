@@ -45,7 +45,7 @@ def places_reg(request):
 
 @login_required(login_url='/admin_login')
 def admin_home(request):
-    booking = BookingModel.objects.all()
+    booking = PaymentModel.objects.all()
     users = UserRegModel.objects.count()
     cars = CarModel.objects.count()
     bookings = BookingModel.objects.count()

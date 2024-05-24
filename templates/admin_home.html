@@ -193,22 +193,22 @@
                                 <table id="datatablesSimple" class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Id</th>
                                             <th scope="col">User</th>
                                             <th scope="col">Car</th>
                                             <th scope="col">Pickup Date</th>
                                             <th scope="col">Dropoff Date</th>
+                                            <th scope="col">Amount</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                     {% for x in book %}
                                         <tr>
-                                            <td scope="row">{{x.booking_id}}</td>
-                                            <td>{{x.user.user_name}}</td>
-                                            <td>{{x.car.car_name}}</td>
-                                            <td>{{x.pickup_date}}</td>
-                                            <td>{{x.dropof_date}}</td>
+                                            <td scope="row">{{x.user.user_name}}</td>
+                                            <td>{{x.booking.car.car_name}}</td>
+                                            <td>{{x.booking.pickup_date}}</td>
+                                            <td>{{x.booking.dropof_date}}</td>
+                                            <td>{{x.amount}}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
