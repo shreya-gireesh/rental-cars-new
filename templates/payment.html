@@ -153,7 +153,8 @@
                             var orderId = response.razorpay_order_id;
                             var price = "{{payment.amount}}";
                             var signature = response.razorpay_signature;
-                           window.location.href = `http://rentalcarsystemshreya.smecskills.com/payment_success/?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}&price=${price}`;
+                            alert(`Payment of ${price} with ${paymentId} of order ${orderId} is successful!`)
+                           //window.location.href = `http://127.0.0.1:8000/payment_success/?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}&price=${price}`;
                         },
                         "prefill": {
                             "name": "Gaurav Kumar",
